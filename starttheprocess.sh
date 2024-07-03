@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sudo apt update && sudo apt full-upgrade -y
-
 mkdir ~/Documents/mytools ~/Documents/myscripts ~/Documents/mylabs ~/Documents/mytests
 
 
@@ -34,14 +32,7 @@ echo "alias nessus-stop='sudo /bin/systemctl stop nessusd.service'" >> .bashrc
 
 #COMMENT
 
-
-echo "##### Unzipping the rockyou.txt #####"
-if [ -f /usr/share/wordlists/rockyou.txt.gz ]; then
-    sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
-fi
-
 # Commenting auto suggestions
-echo "##### Commenting the auto suggestions #####"
 
 # Define the lines to be commented out
 lines_to_comment=(
@@ -55,29 +46,3 @@ for line in "${lines_to_comment[@]}"; do
     sed -i "s|^\($line\)|#\1|" .bashrc
 done
 
-echo "##### Installing Necessary Languages #####"
-
-sudo apt update
-sudo apt install -y python3 ruby-full nodejs npm git curl wget golang
-
-echo "#### Installing Seclists ####"
-sudo apt install seclists
-
-echo "##### Installing Necessary tools #####"
-
-sudo apt install sublist3r dirb feroxbuster ffuf tmux gedit set recon-ng assetfinder vim beef amass konsole gnome-terminal git httprobe wfuzz wifite htop etherape  -y
-
-sudo apt install zaproxy -y
-echo "##### Installing Sublime text ####"
-
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/sublimehq-archive.gpg > /dev/null
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-sudo apt-get update
-sudo apt-get install sublime-text
-
-
-echo "hgrep(){    \nhistory | grep $1 \n}" >> .bashrc_profile
-echo "ipinfo(){    \ncurl http://ipinfo.io/$1 \n}" >> .bashrc_profile
-echo "ncx(){    nc -nlvp $1 \n}" >> .bashrc_profile
-
-# source .bashrc_profile
